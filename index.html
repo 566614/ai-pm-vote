@@ -352,6 +352,22 @@ window.onload = function() {
     inputs.forEach((input, i) => { if(voteData[i]) input.value = voteData[i]; });
   }
 }
+</script><button onclick="saveAllVotes()" style="margin:10px; padding:8px 16px;">保存我的填写内容</button>
+<script>
+function saveAllVotes() {
+  const inputs = document.querySelectorAll("input");
+  const voteData = Array.from(inputs).map(input => input.value);
+  localStorage.setItem('pmVoteData', JSON.stringify(voteData));
+  alert('你的填写内容已保存在本地，刷新页面也不会丢失了');
+}
+window.onload = function() {
+  const saved = localStorage.getItem('pmVoteData');
+  if (saved) {
+    const voteData = JSON.parse(saved);
+    const inputs = document.querySelectorAll("input");
+    inputs.forEach((input, i) => { if(voteData[i]) input.value = voteData[i]; });
+  }
+}
 </script>
 </body>
 </html>
